@@ -74,7 +74,7 @@ module.exports = {
 
   claimTask: app.put("/tasks/:task_id", function (req, res) {
     connection.query(
-      "UPDATE tasks SET fk_user_id=(?), task_claimant=(SELECT user_name FROM users WHERE user_id=(?)) WHERE task_id=(?)",
+      "UPDATE tasks SET fk_user_id=(?), task_status='Claimed', task_claimant=(SELECT user_name FROM users WHERE user_id=(?)) WHERE task_id=(?)",
       [req.body.user_id, req.body.user_id, req.body.task_id],
       function (error, results, fields) {
         if (error) {
@@ -96,4 +96,20 @@ module.exports = {
       }
     );
   }),
+  changeStatus: app.put("/status-task/:task_id", function (req, res) {
+    connection.query(
+      "UPDATE tasks SET task_status='Archived', task_finished=(?) WHERE task_id=(?)",
+      [new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        new Date().getDate()
+      ), req.body.id],
+      function (error, results, fields) {
+        if (error) {
+          res.status(500).send(error);
+        }
+        res.send(results);
+      }
+    );
+  })
 };
