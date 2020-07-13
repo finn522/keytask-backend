@@ -2,7 +2,7 @@ const { connection, app } = require("./connection.js");
 
 module.exports = {
     postPushResult: app.post("/push-result", function (req, res) {
-        console.log(req.body.test)
+      console.log(req, res)
         connection.query(
           "INSERT INTO pipeline_inserts (commit_message, test_results, total_tests, tests_passed) VALUES (?, ?, ?, ?)",
           [
