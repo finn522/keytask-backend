@@ -99,11 +99,14 @@ module.exports = {
   changeStatus: app.put("/status-task/:task_id", function (req, res) {
     connection.query(
       "UPDATE tasks SET task_status='Archived', task_finished=(?) WHERE task_id=(?)",
-      [new Date(
-        new Date().getFullYear(),
-        new Date().getMonth(),
-        new Date().getDate()
-      ), req.body.id],
+      [
+        new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          new Date().getDate()
+        ),
+        req.body.id,
+      ],
       function (error, results, fields) {
         if (error) {
           res.status(500).send(error);
@@ -111,5 +114,17 @@ module.exports = {
         res.send(results);
       }
     );
-  })
+  }),
+  fetchTaskTitles: app.get("/tasks-title", function (req, res) {
+    connection.query("SELECT task_title FROM tasks", function (
+      error,
+      results,
+      fields
+    ) {
+      if (error) {
+        res.status(500).send(error);
+      }
+      res.send(results);
+    });
+  }),
 };

@@ -12,5 +12,21 @@ swapDate: function swapDate(date) {
     else{
       return deadline_date;
     }
+  },
+
+  calculateModifer: function calculateModifer(total_tests, completed_tests){
+   if ( total_tests / completed_tests === 1){
+     return 1.10;
+   }
+   else{
+     let percentage = completed_tests / total_tests;
+     if (percentage === 0){
+       return 0.1
+     }
+     else{
+       return percentage;
+     }
+
+   }
   }
 }

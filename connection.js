@@ -3,18 +3,18 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const cors = require('cors');
 
-const connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'keytask_user',
-    password : 'Hsz4X3TjfE',
-    database : 'keytask_database'
-    });  
 // const connection = mysql.createConnection({
 //     host     : 'localhost',
-//     user     : 'User',
-//     password : '7npaS3$9q!4G',
-//     database : 'react_test_sql'
-// })
+//     user     : 'keytask_user',
+//     password : 'Hsz4X3TjfE',
+//     database : 'keytask_database'
+//     });  
+const connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'User',
+    password : '7npaS3$9q!4G',
+    database : 'react_test_sql'
+})
 
     const app = express();
 
