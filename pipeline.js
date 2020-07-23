@@ -6,7 +6,6 @@ module.exports = {
       "SELECT commit_message FROM pipeline_inserts WHERE commit_message = (?)",
       [req.body.commit_message],
       function (error, results, fields) {
-        console.log(results.length);
         if (results.length === 0) {
           connection.query(
             "INSERT INTO pipeline_inserts (commit_message, test_results, total_tests, tests_passed, fk_task_id) SELECT ?, ?, ?, ?, tasks.task_id FROM tasks WHERE task_title = (?) AND task_status = 'Claimed'",
